@@ -33,6 +33,7 @@ const userModal = new Schema({
   },
   type: {
     type: Number,
+    default: 0,
     require: true,
     maxlength: 1
   }

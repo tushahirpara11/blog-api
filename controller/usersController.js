@@ -19,7 +19,7 @@ async function authenticate(req, res) {
   try {
     const user = await userModel.findOne({ userName: req.body.userName, password: req.body.password }, { password: 0 });
     if (user != null) {      
-      jwt.sign(user.userName, process.env.SECRET_KEY, function (err, token) {
+      jwt.sign({user}, process.env.SECRET_KEY, function (err, token) {
         res.json(Message(200, 'OK', 'Token Created', token));
       });
     }
