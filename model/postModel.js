@@ -22,6 +22,6 @@ const postModal = new Schema({
   }
 });
 
-const post = mongoose.model('user', postModal);
+const post = mongoose.model('Post', postModal);
 
-module.exports = { post };
+module.exports = post;

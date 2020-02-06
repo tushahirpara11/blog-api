@@ -17,7 +17,7 @@ const userModal = new Schema({
     require: true,
     maxlength: 15
   },
-  useName: {
+  userName: {
     type: String,
     require: true
   },
@@ -36,8 +36,8 @@ const userModal = new Schema({
     require: true,
     maxlength: 1
   }
-});
+}, { versionKey: false });
 
-const user = mongoose.model('user', userModal);
+const user = mongoose.model('User', userModal);
 
-module.exports = { user };
+module.exports = user;
