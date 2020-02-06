@@ -15,4 +15,17 @@ async function addUser(req, res) {
   }
 }
 
-module.exports = {addUser};
+async function authenticate(req, res) {
+  try {
+    const user = await userModel.findOne({ userName: req.body.userName, password: req.body.password }, { password: 0 });
+    if (user != null) {      
+      jwt.sign(user.userName, process.env.SECRET_KEY, function (err, token) {
+        res.json(Message(200, 'OK', 'Token Created', token));
+      });
+    }
+  } catch (err) {
+    res.json(message(400, 'Bad Request', 'User not exists'));
+  }
+}
+
+module.exports = { addUser, authenticate };

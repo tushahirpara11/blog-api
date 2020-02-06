@@ -8,7 +8,7 @@ const postModal = new Schema({
     require: true
   },
   uid: {
-    type: Number,
+    type: String,
     require: true
   },
   title: {
