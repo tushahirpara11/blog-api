@@ -14,7 +14,9 @@ async function addPost(req, res) {
     res.json(Message(false, "Error", err));
   }
 }
-
+function Post(req,res) {
+  res.render('addPost');
+}
 async function getPost(req, res) {
   try {
     let post;
@@ -33,4 +35,4 @@ async function getPost(req, res) {
   }
 }
 
-module.exports = { addPost, getPost };
+module.exports = { addPost, getPost, Post };

@@ -8,7 +8,9 @@ const { verifyToken } = require('../middleware/middleware');
 router.get('/login', userAuth.login);
 router.post('/authenticate', userAuth.authenticate);
 router.post('/user', userAuth.addUser);
+
+router.get('/post/user', verifyToken, userPost.Post);
 router.post('/post/user', verifyToken, userPost.addPost);
-router.get('/post/user', verifyToken, userPost.getPost);
+// router.get('/post/user', verifyToken, userPost.getPost);
 
 module.exports = router;

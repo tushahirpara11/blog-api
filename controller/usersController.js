@@ -22,12 +22,12 @@ async function addUser(req, res) {
     res.json(Message("false", "Data already Exists"));
   }
 }
-function cookiesVerify(req, res, token) {
-  if (req.cookies[req.body.userName] === undefined) {
-    res.send(Message(200, "true", "OK", token, 'Token Generated')).
-      cookie(req.body.userName, token, { maxAge: 900000, httpOnly: true });
+
+function cookiesVerify(req, res, token) {  
+  if (req.cookies.token === undefined) {
+    res.cookie('token', token, { maxAge: 900000, httpOnly: true }).redirect('/post/user');
   } else {
-    res.json(Message(400, "false", "You ar0e already logged in", ''));
+    res.json(Message(400, "false", "You are already logged in", ''));
   }
 }
 

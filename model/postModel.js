@@ -3,10 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const postModal = new Schema({
-  pid: {
-    type: Number,
-    require: true
-  },
   uid: {
     type: String,
     require: true
@@ -18,7 +14,7 @@ const postModal = new Schema({
   },
   discription: {
     type: String,
-    require: true,    
+    require: true,
   }
 });
 
