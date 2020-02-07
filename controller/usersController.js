@@ -22,13 +22,23 @@ async function addUser(req, res) {
     res.json(Message("false", "Data already Exists"));
   }
 }
+function cookiesVerify(req, res, token) {
+  if (req.cookies[req.body.userName] === undefined) {
+    res.send(Message(200, "true", "OK", token, 'Token Generated')).
+      cookie(req.body.userName, token, { maxAge: 900000, httpOnly: true });
+  } else {
+    res.json(Message(400, "false", "You ar0e already logged in", ''));
+  }
+}
 
-async function authenticate(req, res) {  
+async function authenticate(req, res) {
   try {
-    const user = await userModel.findOne({ userName: req.body.email, password: req.body.password }, { password: 0 });    
+    const user = await userModel.findOne({ userName: req.body.userName, password: req.body.password }, { password: 0 });
     if (user != null) {
       jwt.sign({ user }, process.env.SECRET_KEY, function (err, token) {
-        res.json(Message(200, true, 'OK', 'Token Created', token));
+        if (token) {
+          cookiesVerify(req, res, token);
+        }
       });
     } else {
       res.json(Message(400, "false", 'OK', 'User Not Found'));

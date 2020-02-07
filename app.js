@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
 
@@ -10,6 +11,7 @@ const app = express();
 
 app.use(bodyparser.text());
 app.use(bodyparser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
