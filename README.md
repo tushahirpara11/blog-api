@@ -1,12 +1,12 @@
 # blog-api
 
 # Pre-requirements
-## Below two thing must be installed in your system.
-### 1)Node Version: v12.14.0  
-### 2)MongoDB shell version: v4.2.2  
+Below two thing must be installed in your system.
+1)Node Version: v12.14.0  
+2)MongoDB shell version: v4.2.2  
 
 
-# Fire Following Commands to run project.
+## Fire Following Commands to run project.
 
 ```git
 git clone https://github.com/tushahirpara11/blog-api.git  
@@ -23,7 +23,7 @@ cd blog-api
 npm i
 ```
 
-# Create .env file to configure project and create following enviroment variables.  
+## Create .env file to configure project and create following enviroment variables.  
 
 ```node
  SECRET_KEY = 'your secret key'
