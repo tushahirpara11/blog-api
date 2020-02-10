@@ -11,7 +11,6 @@ Below two thing must be installed in your system.
 ```git
 git clone https://github.com/tushahirpara11/blog-api.git  
 ```
-## To move in project directory.
 
 ```bash
 cd blog-api
@@ -31,8 +30,6 @@ npm i
  HOSTNAME = 'Your Host Name'  
  PORT = add Port number  
 ```
-
-## To start mongodb server using
 
 ```node
   sudo service mongod start 
