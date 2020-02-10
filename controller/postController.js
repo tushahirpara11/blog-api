@@ -14,7 +14,7 @@ async function addPost(req, res) {
     res.json(Message(false, "Error", err));
   }
 }
-function Post(req,res) {
+function Post(req, res) {
   res.render('addPost');
 }
 async function getPost(req, res) {
@@ -22,13 +22,13 @@ async function getPost(req, res) {
     let post;
     if (req.type == 0) {
       post = await postModel.find({ uid: req.user });
-      post.length > 0 ? res.json(Message(200, "true", "Post Found", post)) :
-        res.json(Message(200, "false", "Post Not Found"));
+      post.length > 0 ? res.render('viewPost', { post }) :
+        res.render('viewPost', "Post Not Found");
     }
     else {
       post = await postModel.find({});
-      post.length > 0 ? res.json(Message(200, "true", "Post Found", post)) :
-        res.json(Message(200, "false", "Post Not Found"));
+      post.length > 0 ? res.render('viewPost', { post }) :
+        res.render('viewPost', "Post Not Found");
     }
   } catch (err) {
     res.json(Message(false, "Error", err));

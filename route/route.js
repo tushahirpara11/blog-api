@@ -12,6 +12,5 @@ router.post('/user', userAuth.addUser);
 router.get('/user/post', verifyToken, userPost.Post);
 router.get('/post/user', verifyToken, userPost.getPost);
 router.post('/post/user', verifyToken, userPost.addPost);
-// router.get('/post/user', verifyToken, userPost.getPost);
 
 module.exports = router;
