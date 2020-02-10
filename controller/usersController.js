@@ -5,7 +5,11 @@ const userModel = require('../model/userModel');
 const { Message } = require('../commonFunction/commonFunction');
 
 function login(req, res) {
-  res.render('index');
+  res.render('login', { email: req.userName });
+}
+
+function register(req, res) {
+  res.render('register', { email: req.userName });
 }
 
 async function addUser(req, res) {
@@ -13,22 +17,26 @@ async function addUser(req, res) {
   if (count.length != 1) {
     let addUser = new userModel(req.body);
     try {
-      const userData = await addUser.save();
-      res.json(Message(200, "true", "User Added", userData));
+      await addUser.save();
+      res.redirect('/user/login');
     } catch (err) {
       res.json(Message("false", "Error", err));
     }
   } else {
-    res.json(Message("false", "Data already Exists"));
+    res.redirect('/user/login');
   }
 }
 
-function cookiesVerify(req, res, token) {  
+function cookiesVerify(req, res, token) {
   if (req.cookies.token === undefined) {
     res.cookie('token', token, { maxAge: 900000, httpOnly: true }).redirect('/post/user');
   } else {
     res.json(Message(400, "false", "You are already logged in", ''));
   }
+}
+
+function logout(req, res) {
+  res.clearCookie('token').redirect('/user/login');
 }
 
 async function authenticate(req, res) {
@@ -48,4 +56,4 @@ async function authenticate(req, res) {
   }
 }
 
-module.exports = { addUser, authenticate, login };
+module.exports = { addUser, authenticate, login, register, logout };

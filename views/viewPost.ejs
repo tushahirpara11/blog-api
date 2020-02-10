@@ -26,17 +26,19 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col">Id</th>        
+        <th scope="col">Id</th>
+        <th scope="col">Title</th>
         <th scope="col">Discription</th>
         <th scope="col">User Id</th>
       </tr>
     </thead>
     <tbody>
-      <% let cnt = 0;
+      <% let cnt = 1;
        for(let i= 0; i < post.length; i++) {%>
       <tr>
         <th scope="row"><%= cnt %></th>
-        <td><%= post[i]._id %></td>                
+        <td><%= post[i]._id %></td>
+        <td><%= post[i].title %></td>
         <td><%= post[i].discription %></td>
         <td><%= post[i].uid %></td>
       </tr><% cnt++;
