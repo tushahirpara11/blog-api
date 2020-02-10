@@ -7,9 +7,6 @@ Below two thing must be installed in your system.
 
 ## Fire Following Commands to run project.
 
-```bash
-cd blog-api
-```
 ## To install project dependencies.
 
 ```node
@@ -22,9 +19,6 @@ npm i
  MONGODB = 'mongodb://127.0.0.1/Your Database Name'  
  HOSTNAME = 'Your Host Name'  
  PORT = add Port number  
-```
-```node
-  sudo service mongod start 
 ```
 
 ## Finally, start project using  
