@@ -15,4 +15,4 @@ PORT =  //add Port number
 
 finally, start application using
 
-node index.js //to run project
+node app.js //to run project
