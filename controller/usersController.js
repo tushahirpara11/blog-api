@@ -30,8 +30,8 @@ async function addUser(req, res) {
 function cookiesVerify(req, res, token) {
   if (req.cookies.token === undefined) {
     res.cookie('token', token, { maxAge: 900000, httpOnly: true }).redirect('/post/user');
-  } else {
-    res.json(Message(400, "false", "You are already logged in", ''));
+  } else {  
+    res.json(Message(400, "false", 'OK', 'User Already Login'));    
   }
 }
 
@@ -49,7 +49,7 @@ async function authenticate(req, res) {
         }
       });
     } else {
-      res.json(Message(400, "false", 'OK', 'User Not Found'));
+      res.redirect('/user/login');
     }
   } catch (err) {
     res.json(Message(400, "false", 'Bad Request', ''));
