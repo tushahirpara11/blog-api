@@ -7,11 +7,11 @@ exports.verifyToken = function (req, res, next) {
   if (typeof headers != 'undefined') {
     jwt.verify(headers, process.env.SECRET_KEY, (err, decode) => {
       if (err) res.json(Message("false", "Invalid Token"));
-      req.user = decode.user.userName;
-      req.type = decode.user.type;
+      req.user = decode.data.userName;
+      req.type = decode.data.type;
       next();
     });
-  } else {    
+  } else {
     res.redirect('/user/login');
   }
 }

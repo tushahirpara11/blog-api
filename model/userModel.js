@@ -23,8 +23,7 @@ const userModal = new Schema({
   },
   password: {
     type: String,
-    require: true,
-    maxlength: 15
+    require: true    
   },
   contact: {
     type: String,

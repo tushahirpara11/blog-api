@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const bodyparser = require('body-parser');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const bycrpt = require('bcrypt');
 require('dotenv').config();
 
 const routes = require('./route/route');
@@ -12,10 +11,6 @@ const app = express();
 
 app.use(bodyparser.text());
 app.use(bodyparser.urlencoded({ extended: false }));
-app.use(flash());
-app.use(session({
-  secret: "abc"
-}));
 app.use(cookieParser());
 
 app.set('views', path.join(__dirname, 'views'));

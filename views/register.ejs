@@ -1,49 +1,48 @@
-
-  <%- include ('nav.ejs') %>
-  <div class="container margin-30 col-md-6">
-    <form method="POST" class="form-handle" action="/user/register">
-      <div>
-        <h1 style="text-align: center;"> Register</h1>
-        <hr><br>
-        <div class="form-group col-lg-12 margin-30">
-          <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Enter First Name" />
-        </div>
-        <div class="form-group col-lg-12">
-          <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter Last Name" />
-        </div>
-        <div class="form-group col-lg-12">
-          <input type="text" id="userName" name="userName" class="form-control" placeholder="Enter User Name" />
-        </div>
-        <div class="form-group col-lg-12">
-          <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" />
-        </div>
-        <div class="form-group col-lg-12">
-          <input type="text" id="contact" name="contact" class="form-control" placeholder="Enter Contact" />
-        </div>
-        <div class="form-group" style="margin-left: 25%;">
-          <input type="submit" value="LOGIN" class="btn btn-info col-lg-4" onclick="return checkValidateData();"
-            style="margin:2% 0  2% 0;" />
-          <button class="btn btn-danger col-lg-4" type="reset">CANCEL</button>
-        </div>
+<%- include ('nav.ejs') %>
+<div class="container margin-30 col-md-6">
+  <form method="POST" class="form-handle" action="/user/register">
+    <div>
+      <h1 style="text-align: center;"> Register</h1>
+      <hr><br>
+      <div class="form-group col-lg-12 margin-30">
+        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Enter First Name" />
       </div>
-    </form>
-  </div>
-  <script type="text/javascript">
-    function checkValidateData() {
-      let firstName = document.getElementById('firstName').value;
-      let lastName = document.getElementById('lastName').value;
-      let userName = document.getElementById('userName').value;
-      let password = document.getElementById('password').value;
-      let contact = document.getElementById('contact').value;
+      <div class="form-group col-lg-12">
+        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter Last Name" />
+      </div>
+      <div class="form-group col-lg-12">
+        <input type="text" id="userName" name="userName" class="form-control" placeholder="Enter User Name" />
+      </div>
+      <div class="form-group col-lg-12">
+        <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" />
+      </div>
+      <div class="form-group col-lg-12">
+        <input type="text" id="contact" name="contact" class="form-control" placeholder="Enter Contact" />
+      </div>
+      <div class="form-group" style="margin-left: 25%;">
+        <input type="submit" value="LOGIN" class="btn btn-info col-lg-4" onclick="return checkValidateData();"
+          style="margin:2% 0  2% 0;" />
+        <button class="btn btn-danger col-lg-4" type="reset">CANCEL</button>
+      </div>
+    </div>
+  </form>
+</div>
+<script type="text/javascript">
+  function checkValidateData() {
+    let firstName = document.getElementById('firstName').value;
+    let lastName = document.getElementById('lastName').value;
+    let userName = document.getElementById('userName').value;
+    let password = document.getElementById('password').value;
+    let contact = document.getElementById('contact').value;
 
-      if (firstName && lastName && userName && password && contact) {
-        return true;
-      } else {
-        alert('Field should not be null');
-        return false;
-      }
+    if (firstName && lastName && userName && password && contact) {
+      return true;
+    } else {
+      alert('Field should not be null');
+      return false;
     }
-  </script>
+  }
+</script>
 </body>
 
 </html>
