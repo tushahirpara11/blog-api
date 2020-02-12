@@ -19,7 +19,7 @@ app.use(express.static(__dirname + '/public/css/'));
 
 mongoose.connect(process.env.MONGODB, { useNewUrlParser: true, useUnifiedTopology: true }, (err, res) => {
   if (err)
-   console.log("Connection String Error. DB not conected");
+    console.log("Connection String Error. DB not conected");
   else
     console.log('Connection established ..!')
 });
