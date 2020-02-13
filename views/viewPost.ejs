@@ -1,40 +1,45 @@
-<%- include ('nav.ejs') %>
+<!------ Include the above in your HEAD tag ---------->
+<br />
 <%if (success) {%>
 <div class="alert alert-success" role="alert">
   <%= success%>
 </div>
 <%}%>
-<table class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Id</th>
-      <th scope="col">Title</th>
-      <th scope="col">Discription</th>
-      <th scope="col">User Id</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% let cnt = 1;
-      if(msg) {%>
-<tr>
-  <th>
-    <center scope=""><%= msg %></center>
-  </th>
-</tr>
-<%} else {
-        for(let i= 0; i < post.length; i++) {%>
-<tr>
-  <th scope="row"><%= cnt %></th>
-  <td><%= post[i]._id %></td>
-  <td><%= post[i].title %></td>
-  <td><%= post[i].discription %></td>
-  <td><%= post[i].uid %></td>
-</tr><% cnt++;
-        }
-      }%>
-</tbody>
-</table>
-</body>
-
-</html>
+<div class="container">
+  <div class="col-lg-12">
+    <% for (let i = 0; i < post.length; i++) {%>
+    <div style="border:1px solid gray; border-radius: 5px;padding: 20px;" class="panel panel-default">
+      <div class="panel-body">
+        <section class="post-heading">
+          <div class="row">
+            <div class="col-md-11">
+              <div class="media">
+                <div class="media-body">
+                  <h4 class="media-heading"><em><%= post[i].title%></em>
+                    <div style="color: grey; float: right;">
+                      <em><%= post[i].userName%></em>
+                    </div>
+                  </h4>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="post-body">
+          <p><%= post[i].discription%></p>
+        </section>
+        <section class="post-footer">
+          <hr />
+          <div class="post-footer-option container">
+            <ul class="list-unstyled">
+              <li><a href="#"><i class="glyphicon glyphicon-thumbs-up"></i> Like</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+    </div>
+    <br />    
+    <%}%>
+  </div>
+</div>

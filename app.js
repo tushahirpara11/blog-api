@@ -5,12 +5,14 @@ const path = require('path');
 const flash = require('req-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const layout = require('express-ejs-layouts');
 require('dotenv').config();
 
 const routes = require('./route/route');
 
 const app = express();
 
+app.use(layout);
 app.use(bodyparser.text());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use(cookieParser());
