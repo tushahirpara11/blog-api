@@ -4,19 +4,20 @@ const Schema = mongoose.Schema;
 
 const postLikeModal = new Schema({  
   uid: {
-    type: Number,
+    type: String,
     require: true
   },
   pid: {
-    type: Number,
+    type: String,
     require: true
   },
   status: {
     type: Number,
-    require: true
+    require: true,
+    default: 1
   }
 }, { versionKey: false });
 
-const user = mongoose.model('postLike', postLikeModal);
+const likePost = mongoose.model('postLike', postLikeModal);
 
-module.exports = user;
+module.exports = likePost;

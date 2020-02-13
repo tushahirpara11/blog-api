@@ -15,5 +15,6 @@ router.get('/user/logout', userAuth.logout);
 router.get('/user/post', verifyToken, userPost.Post);
 router.get('/post/user', verifyToken, userPost.getPost);
 router.post('/post/user', verifyToken, userPost.addPost);
+router.post('/post/like', verifyToken, userPost.like);
 
 module.exports = router;
