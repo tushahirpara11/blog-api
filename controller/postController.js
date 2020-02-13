@@ -9,21 +9,23 @@ async function addPost(req, res) {
   let postData = new postModel(req.body);
   try {
     await postData.save();
-    res.render('addPost', { msg: "Post Added Successfully", email: req.user });
+    req.flash('success', "Post Added Successfully");
+    res.redirect('/post/user');
   } catch (err) {
-    res.render('addPost', { msg: "Problem While Post Adding.", email: req.user });
+    req.flash('error', "Problem While Post Adding.");
+    res.redirect('/user/post');
   }
 }
 function Post(req, res) {
-  res.render('addPost', { msg: "", email: req.user });
+  res.render('addPost', { msg: req.flash('error'), email: req.user });
 }
 async function getPost(req, res) {
   try {
     let post;
     if (req.type == 0) {
       post = await postModel.find({ uid: req.user });
-      post.length > 0 ? res.render('viewPost', { msg: "", post: post, email: req.user }) :
-        res.render('viewPost', { msg: "No Post Found", email: req.user });
+      post.length > 0 ? res.render('viewPost', { success: req.flash('success'), msg: "", post: post, email: req.user }) :
+        res.render('viewPost', { success: req.flash('success'), msg: "No Post Found", email: req.user });
     }
     else {
       post = await postModel.find({});

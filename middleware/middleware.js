@@ -12,6 +12,7 @@ exports.verifyToken = function (req, res, next) {
       next();
     });
   } else {
+    req.flash('credential','User must be login..!')
     res.redirect('/user/login');
   }
 }

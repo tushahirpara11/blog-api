@@ -1,4 +1,17 @@
 <%- include ('nav.ejs') %>
+<% if (msg) {%>
+<div class="alert alert-danger" role="alert">
+  <%= msg%>
+</div>
+<%}else if (register) {%>
+<div class="alert alert-success" role="alert">
+  <%= register%>
+</div>
+<%}else if (credential) {%>
+<div class="alert alert-danger" role="alert">
+  <%= credential%>
+</div>
+<%}%>  
 <div class="container margin-30 col-md-6">
   <form method="POST" class="form-handle" action="/authenticate">
     <div>

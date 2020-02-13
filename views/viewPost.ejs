@@ -1,4 +1,9 @@
 <%- include ('nav.ejs') %>
+<%if (success) {%>
+<div class="alert alert-success" role="alert">
+  <%= success%>
+</div>
+<%}%>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -12,23 +17,23 @@
   <tbody>
     <% let cnt = 1;
       if(msg) {%>
-    <tr>
-      <th>
-        <center scope=""><%= msg %></center>
-      </th>
-    </tr>
-    <%} else {
+<tr>
+  <th>
+    <center scope=""><%= msg %></center>
+  </th>
+</tr>
+<%} else {
         for(let i= 0; i < post.length; i++) {%>
-    <tr>
-      <th scope="row"><%= cnt %></th>
-      <td><%= post[i]._id %></td>
-      <td><%= post[i].title %></td>
-      <td><%= post[i].discription %></td>
-      <td><%= post[i].uid %></td>
-    </tr><% cnt++;
+<tr>
+  <th scope="row"><%= cnt %></th>
+  <td><%= post[i]._id %></td>
+  <td><%= post[i].title %></td>
+  <td><%= post[i].discription %></td>
+  <td><%= post[i].uid %></td>
+</tr><% cnt++;
         }
       }%>
-  </tbody>
+</tbody>
 </table>
 </body>
 
