@@ -37,7 +37,10 @@ async function getPost(req, res) {
       post.length > 0 ? res.render('viewPost', {
         success: req.flash('success'),
         msg: "", like: like, post: post, email: req.user
-      }) : res.render('viewPost', { success: req.flash('success'), like: like, post: post, msg: "No Post Found", email: req.user });
+      }) : res.render('viewPost', {
+        success: req.flash('success'), like: like,
+        post: post, msg: "No Post Found", email: req.user
+      });
     }
     else {
       post = await postModel.find({});
@@ -46,7 +49,10 @@ async function getPost(req, res) {
         success: req.flash('success'), msg: "", like: like,
         post: post, email: req.user
       }) :
-        res.render('viewPost', { success: req.flash('success'), like: like, post: post, msg: "No Post Found", email: req.user });
+        res.render('viewPost', {
+          success: req.flash('success'), like: like,
+          post: post, msg: "No Post Found", email: req.user
+        });
     }
   } catch (err) {
     res.json(Message(false, "Error", err));
