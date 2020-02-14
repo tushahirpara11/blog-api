@@ -5,7 +5,7 @@ const userAuth = require('../controller/usersController');
 const userPost = require('../controller/postController');
 const { verifyToken } = require('../middleware/middleware');
 
-router.get('/', userAuth.login);
+router.get('/', verifyToken, userAuth.index);
 router.get('/user/login', userAuth.login);
 router.get('/user/register', userAuth.register);
 router.post('/user/register', userAuth.addUser);
