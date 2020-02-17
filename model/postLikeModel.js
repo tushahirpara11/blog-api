@@ -10,11 +10,6 @@ const postLikeModal = new Schema({
   pid: {
     type: String,
     require: true
-  },
-  status: {
-    type: Number,
-    require: true,
-    default: 1
   }
 }, { versionKey: false });
 

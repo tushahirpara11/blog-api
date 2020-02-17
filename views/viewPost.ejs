@@ -5,60 +5,110 @@
   <%= success%>
 </div>
 <%}%>
+<style>
+  .iconunlike{
+  font-size: 30px;
+  color: gray;
+  }
+  .iconlike{
+  font-size: 30px;
+  color: blue;
+  }
+</style>
+
 <div class="container">
   <div class="col-lg-12">
     <% let flag =0; if(post.length) {
       for (let i = 0; i < post.length; i++) {%>
-      <form method="post" action="/post/like">
-        <div style="border:1px solid gray; border-radius: 5px;padding: 20px;" class="panel panel-default">
-          <div class="panel-body">
-            <section class="post-heading">
-              <div class="row">
-                <div class="col-md-11">
-                  <div class="media">
-                    <div class="media-body">
-                      <h4 class="media-heading"><em><%= post[i].title%></em>
-                        <div style="color: grey; float: right;">
-                          <em><%= post[i].uid%></em>
-                          <input type="hidden" name="pid" value="<%= post[i]._id%>" />
-                          <input type="hidden" name="uid" value="<%= email %>" />
-                        </div>
-                      </h4>
-                      <hr>
-                    </div>
+<form>
+  <div style="border:1px solid gray; border-radius: 5px;padding: 20px;" class="panel panel-default">
+    <div class="panel-body">
+      <section class="post-heading">
+        <div class="row">
+          <div class="col-md-11">
+            <div class="media">
+              <div class="media-body">
+                <h4 class="media-heading"><em><%= post[i].title%></em>
+                  <div style="color: grey; float: right;">
+                    <em><%= post[i].uid%></em>                    
                   </div>
-                </div>
+                </h4>
+                <hr>
               </div>
-            </section>
-            <section class="post-body">
-              <p><%= post[i].discription%></p>
-            </section>
-            <section class="post-footer">
-              <hr />
-              <div class="post-footer-option container">
-                <ul class="list-unstyled">
-                  <%like.some((ele) => {
-                    if(ele.pid == post[i]._id && ele.uid == email && ele.status == 1 ) {
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="post-body">
+        <p><%= post[i].discription%></p>
+      </section>
+      <section class="post-footer">
+        <hr />
+        <div class="post-footer-option container">
+          <ul class="list-unstyled">
+            <%if(like.length){
+              like.some((ele) => {
+                    if(ele.pid == post[i]._id && ele.uid == email) {
                       flag = 1;                                
                   }});
-                  if(flag == 1) {%>
-                  <button id="btnLike" type="submit"><i class="fa fa-thumbs-up" style="font-size: 30px;color: blue;">
-                    </i>
-                    Like</button>
+                  if(flag == 1) {%>                    
+                      <button id="<%=post[i]._id%>_<%= email%>_like" name = "like" class="like" value="like"
+                      type="submit"><i class="fa fa-thumbs-up iconlike" class="like">
+                        </i>
+                        </button>                    
                   <% flag =0;} else {%>
-                  <button id="btndisLike" type="submit"><i class="fa fa-thumbs-up" style="font-size: 30px;color: gray;">
-                    </i>
-                    Like</button>
+                      <button id="<%=post[i]._id%>_<%= email%>_dislike" name = "unlike" class="unlike"  value="unlike" type="submit"><i class="fa fa-thumbs-up iconunlike"
+                          id="dislike">
+                        </i>
+                        </button>
+                  <%}} else {%>
+                      <button id="<%=post[i]._id%>_<%= email%>_dislike" name = "unlike" class="unlike" value="unlike"
+                      type="submit"><i class="fa fa-thumbs-up iconunlike" id="dislike">
+                      </i>
+                      </button>              
                   <%}%>
                 </ul>
               </div>
             </section>
           </div>
-        </div>
-      </form>
+        </div>      
       <br />
     <%} } else {%>
       <p><%= msg%></p>
     <%}%>
+    </form>
   </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+<script>
+  $(document).ready(function () {    
+    // like and unlike click
+    $(".like, .unlike").click(function (e) {
+      e.preventDefault();        
+      if(this.id != ""){ 
+        let changeIconid= this.id;
+        let id = this.id;   // Getting Button id
+        let split_id = id.split("_");
+
+        id = split_id[0];  // postid
+        let email = split_id[1];
+          
+        // AJAX Request
+        $.ajax({
+          url: '/post/like',
+          type: 'post',
+          data: { uid: email, pid: id},
+          dataType: 'JSON',
+          success: function (data) {                        
+            $("#"+changeIconid).html('');
+            if(data == 1) {              
+              $("#"+changeIconid).html('<i class="fa fa-thumbs-up iconlike" id="like"></i>');              
+            } else {              
+              $("#"+changeIconid).html('<i class="fa fa-thumbs-up iconunlike" id="dislike"></i>');              
+            }
+          }
+        });
+      }      
+    });
+  });
+</script>
