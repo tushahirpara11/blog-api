@@ -1,10 +1,13 @@
-<%- include ('nav.ejs') %>
+<% if (msg) {%>
+<div class="alert alert-danger" role="alert">
+  <%= msg%>
+</div>
+<%}%>
 <span class="container margin-30">
   <form method="POST" class="form-handle" action="/post/user">
     <div>
       <h1 style="text-align: center;">Add Post</h1>
-      <hr><br />
-      <span class="success"><%= msg %></span><br /> <br />
+      <hr><br />      
       <div class="form-group col-lg-6 margin-30">
         <input type="text" id="title" name="title" class="form-control" placeholder="Enter Post Title" />
       </div>
@@ -17,20 +20,17 @@
         <button class="btn btn-danger col-lg-2" type="reset">CANCEL</button>
       </div>
     </div>
-  </form>
-  </div>
-  <script type="text/javascript">
-    function checkValidateData() {
-      let postTitle = document.getElementById('postTitle').value;
-      let discription = document.getElementById('discription').value;
-      if (postTitle && discription) {
-        return true;
-      } else {
-        alert('Field should not be null');
-        return false;
-      }
+</form>
+</div>
+<script type="text/javascript">
+  function checkValidateData() {
+    let postTitle = document.getElementById('postTitle').value;
+    let discription = document.getElementById('discription').value;
+    if (postTitle && discription) {
+      return true;
+    } else {
+      alert('Field should not be null');
+      return false;
     }
-  </script>
-  </body>
-
-  </html>
+  }
+</script>
