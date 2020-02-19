@@ -1,29 +1,70 @@
 <div class="container margin-30 col-md-6">
   <form method="POST" id="register" class="form-handle" action="/user/register">
     <div>
-      <h1 style="text-align: center;"> Register</h1>
-      <hr><br>
+      <h1 style="text-align: center;">Register</h1>
+      <hr />
+      <br />
       <div class="form-group col-lg-12 margin-30">
-        <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Enter First Name" />
+        <input
+          type="text"
+          id="firstName"
+          name="firstName"
+          class="form-control"
+          placeholder="Enter First Name"
+        />
       </div>
       <div class="form-group col-lg-12">
-        <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter Last Name" />
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          class="form-control"
+          placeholder="Enter Last Name"
+        />
       </div>
       <div class="form-group col-lg-12">
-        <input type="text" id="userName" name="userName" class="form-control" placeholder="Enter User Name" />
+        <input
+          type="text"
+          id="userName"
+          name="userName"
+          class="form-control"
+          placeholder="Enter User Name"
+        />
       </div>
       <div class="form-group col-lg-12">
-        <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter password"
+        />
       </div>
       <div class="form-group col-lg-12">
-        <input type="password" id="cpassword" name="cpassword" class="form-control"
-          placeholder="Enter Confirm password" />
+        <input
+          type="password"
+          id="cpassword"
+          name="cpassword"
+          class="form-control"
+          placeholder="Enter Confirm password"
+        />
       </div>
       <div class="form-group col-lg-12">
-        <input type="text" id="contact" name="contact" class="form-control" placeholder="Enter Contact" />
+        <input
+          type="text"
+          id="contact"
+          name="contact"
+          class="form-control"
+          placeholder="Enter Contact"
+        />
       </div>
       <div class="form-group" style="margin-left: 25%;">
-        <input type="submit" value="Register" class="btn btn-info col-lg-4" style="margin:2% 0  2% 0;" />
+        <input
+          type="submit"
+          value="Register"
+          class="btn btn-info col-lg-4"
+          style="margin:2% 0  2% 0;"
+        />
         <button class="btn btn-danger col-lg-4" type="reset">CANCEL</button>
       </div>
     </div>
@@ -31,65 +72,90 @@
 </div>
 
 <script>
-  $(document).ready(function () {
-    $('#register').submit(function (e) {
-      let first_name = $('#firstName').val();
-      let last_name = $('#lastName').val();
-      let contact = $('#contact').val();
-      let userName = $('#userName').val();
-      let password = $('#password').val();
-      let cpassword = $('#cpassword').val();
+  $(document).ready(function() {
+    $("#register").submit(function(e) {
+      let first_name = $("#firstName").val();
+      let last_name = $("#lastName").val();
+      let contact = $("#contact").val();
+      let userName = $("#userName").val();
+      let password = $("#password").val();
+      let cpassword = $("#cpassword").val();
 
       $(".error").remove();
 
-      if (first_name.length < 1 || first_name == '') {
+      if (first_name.length < 1 || first_name == "") {
         e.preventDefault();
-        $('#firstName').after('<span class="error">This field is required</span>');
+        $("#firstName").after(
+          '<span class="error">This field is required</span>'
+        );
       } else if (first_name.length >= 15) {
         e.preventDefault();
-        $('#firstName').after('<span class="error">First Name should maximum 15 characters. only</span>');
+        $("#firstName").after(
+          '<span class="error">First Name should maximum 15 characters. only</span>'
+        );
       }
-      if (last_name.length < 1 || last_name == '') {
+      if (last_name.length < 1 || last_name == "") {
         e.preventDefault();
-        $('#lastName').after('<span class="error">This field is required</span>');
-
+        $("#lastName").after(
+          '<span class="error">This field is required</span>'
+        );
       } else if (last_name.length >= 15) {
         e.preventDefault();
-        $('#lastName').after('<span class="error">Last Name should maximum 15 characters. only</span>');
+        $("#lastName").after(
+          '<span class="error">Last Name should maximum 15 characters. only</span>'
+        );
       }
-      if (userName.length < 1 || userName == '') {
+      if (userName.length < 1 || userName == "") {
         e.preventDefault();
-        $('#userName').after('<span class="error">This field is required</span>');
+        $("#userName").after(
+          '<span class="error">This field is required</span>'
+        );
       } else if (userName.length >= 15) {
         e.preventDefault();
-        $('#userName').after('<span class="error">Last Name should maximum 15 characters. only</span>');
+        $("#userName").after(
+          '<span class="error">Last Name should maximum 15 characters. only</span>'
+        );
       }
-      if (password == '') {
+      if (password == "") {
         e.preventDefault();
-        $('#password').after('<span class="error">This field is required</span>');
+        $("#password").after(
+          '<span class="error">This field is required</span>'
+        );
       } else if (password.length > 8) {
         e.preventDefault();
-        $('#password').after('<span class="error">Password should be maximum 8 characters long</span>');
+        $("#password").after(
+          '<span class="error">Password should be maximum 8 characters long</span>'
+        );
       }
-      if (cpassword == '') {
+      if (cpassword == "") {
         e.preventDefault();
-        $('#cpassword').after('<span class="error">This field is required</span>');
+        $("#cpassword").after(
+          '<span class="error">This field is required</span>'
+        );
       } else if (cpassword.length > 8) {
         e.preventDefault();
-        $('#cpassword').after('<span class="error">Confirm Password should be maximum 8 characters long</span>');
+        $("#cpassword").after(
+          '<span class="error">Confirm Password should be maximum 8 characters long</span>'
+        );
       }
       if (password !== cpassword) {
         e.preventDefault();
-        $('#cpassword').after('<span class="error">Password and Confirm Password should be same.</span>');
+        $("#cpassword").after(
+          '<span class="error">Password and Confirm Password should be same.</span>'
+        );
       }
       let rejexContact = /^[0-9]{10}$/;
-      if (contact == '') {
+      if (contact == "") {
         e.preventDefault();
-        $('#contact').after('<span class="error">This field is required</span>');
+        $("#contact").after(
+          '<span class="error">This field is required</span>'
+        );
       } else if (!rejexContact.test(contact)) {
         e.preventDefault();
-        $('#contact').after('<span class="error">Contact should be maximum 10 digits only</span>');
+        $("#contact").after(
+          '<span class="error">Contact should be maximum 10 digits only</span>'
+        );
       }
-    })    
+    });
   });
 </script>

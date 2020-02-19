@@ -21,7 +21,7 @@ function Post(req, res) {
 }
 async function getPost(req, res) {
   try {
-    let post, like;
+    let post, like, cntLike, likeCounter = [], a = {};
     if (req.type == 0) {
       try {
         post = await postModel.find({ uid: req.user });
@@ -30,27 +30,60 @@ async function getPost(req, res) {
         } catch (err) {
           res.send(Message(400, false, `Error occured while finding post's like: ${err}`));
         }
+        try {
+          for (let i = 0; i < post.length; i++) {
+            cntLike = await postLikeModel.aggregate([{ "$match": { pid: { $eq: "" + post[i]._id } } }, { $group: { _id: post[i]._id, count: { $sum: 1 } } }]);
+            if (cntLike.length) {
+              likeCounter.push(cntLike);
+            } else {
+              likeCounter.push([a]);
+            }
+          }
+        } catch (err) {
+          res.send(Message(400, false, `Error occured while couting post's like: ${err}`));
+        }
       }
       catch (err) {
         res.send(Message(400, false, `Error occured while finding post by user: ${err}`));
       }
       post.length > 0 ? res.render('viewPost', {
         success: req.flash('success'),
-        msg: "", like: like, post: post, email: req.user
+        msg: "", like: like, likeCount: likeCounter.flat(), post: post, email: req.user
       }) : res.render('viewPost', {
-        success: req.flash('success'), like: like,
+        success: req.flash('success'), like: like, likeCount: likeCounter.flat(),
         post: post, msg: "No Post Found", email: req.user
       });
     }
     else {
-      post = await postModel.find({});
-      like = await postLikeModel.find({});
+      try {
+        post = await postModel.find({});
+        try {
+          like = await postLikeModel.find({});
+        } catch (err) {
+          res.send(Message(400, false, `Error occured while finding post's like: ${err}`));
+        }
+        try {
+          for (let i = 0; i < post.length; i++) {
+            cntLike = await postLikeModel.aggregate([{ "$match": { pid: { $eq: "" + post[i]._id } } }, { $group: { _id: post[i]._id, count: { $sum: 1 } } }]);
+            if (cntLike.length) {
+              likeCounter.push(cntLike);
+            } else {
+              likeCounter.push([a]);
+            }
+          }
+        } catch (err) {
+          res.send(Message(400, false, `Error occured while couting post's like: ${err}`));
+        }
+      }
+      catch (err) {
+        res.send(Message(400, false, `Error occured while finding post: ${err}`));
+      }
       post.length > 0 ? res.render('viewPost', {
-        success: req.flash('success'), msg: "", like: like,
+        success: req.flash('success'), msg: "", like: like, likeCount: likeCounter.flat(),
         post: post, email: req.user
       }) :
         res.render('viewPost', {
-          success: req.flash('success'), like: like,
+          success: req.flash('success'), like: like, likeCount: likeCounter.flat(),
           post: post, msg: "No Post Found", email: req.user
         });
     }

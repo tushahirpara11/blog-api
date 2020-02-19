@@ -10,20 +10,38 @@
 <div class="alert alert-danger" role="alert">
   <%= credential%>
 </div>
-<%}%>  
+<%}%>
 <div class="container margin-30 col-md-6">
   <form method="POST" id="login" class="form-handle" action="/authenticate">
     <div>
       <h1 style="text-align: center;">LOGIN</h1>
-      <hr><br>
+      <hr />
+      <br />
       <div class="form-group col-lg-12 margin-30">
-        <input type="text" id="userName" name="userName" class="form-control" placeholder="Enter User Name" />
+        <input
+          type="text"
+          id="userName"
+          name="userName"
+          class="form-control"
+          placeholder="Enter User Name"
+        />
       </div>
       <div class="form-group col-lg-12">
-        <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          class="form-control"
+          placeholder="Enter password"
+        />
       </div>
       <div class="form-group" style="margin-left: 25%;">
-        <input type="submit" value="LOGIN" class="btn btn-info col-lg-4" style="margin:2% 0  2% 0;" />
+        <input
+          type="submit"
+          value="LOGIN"
+          class="btn btn-info col-lg-4"
+          style="margin:2% 0  2% 0;"
+        />
         <button class="btn btn-danger col-lg-4" type="reset">CANCEL</button>
       </div>
     </div>
@@ -31,28 +49,36 @@
 </div>
 
 <script>
-  $(document).ready(function () {
-    $('#login').submit(function (e) {
-      let userName = $('#userName').val();
-      let password = $('#password').val();
+  $(document).ready(function() {
+    $("#login").submit(function(e) {
+      let userName = $("#userName").val();
+      let password = $("#password").val();
 
       $(".error").remove();
 
-      if (userName.length < 1 || userName == '') {
+      if (userName.length < 1 || userName == "") {
         e.preventDefault();
-        $('#userName').after('<span class="error">This field is required</span>');
+        $("#userName").after(
+          '<span class="error">This field is required</span>'
+        );
       } else if (userName.length >= 15) {
         e.preventDefault();
-        $('#userName').after('<span class="error">Last Name should maximum 15 characters. only</span>');
+        $("#userName").after(
+          '<span class="error">Last Name should maximum 15 characters. only</span>'
+        );
       }
-      if (password == '') {
+      if (password == "") {
         e.preventDefault();
-        $('#password').after('<span class="error">This field is required</span>');
+        $("#password").after(
+          '<span class="error">This field is required</span>'
+        );
       } else if (password.length > 8) {
         e.preventDefault();
-        $('#password').after('<span class="error">Password should be maximum 8 characters long</span>');
+        $("#password").after(
+          '<span class="error">Password should be maximum 8 characters long</span>'
+        );
       }
-    })
+    });
     e.preventDefault();
   });
 </script>
