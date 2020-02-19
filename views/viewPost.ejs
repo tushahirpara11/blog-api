@@ -101,7 +101,7 @@
 
         // AJAX Request
         $.ajax({
-          url: "/post/like",
+          url: `/users/${email}/posts/${id}/like`,
           type: "post",
           data: { uid: email, pid: id },
           dataType: "JSON",

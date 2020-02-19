@@ -29,37 +29,40 @@ function register(req, res) {
 
 async function addUser(req, res) {
   try {
-    const count = await userModel.findOne({ userName: req.body.userName, contact: req.body.contact })
+    const count = await userModel.findOne({
+      userName: req.body.userName,
+      contact: req.body.contact
+    });
     if (count === null) {
       req.body.password = await bycrpt.hash(req.body.password, 10);
       let addUser = new userModel(req.body);
       try {
         addUser.save();
         req.flash('register', 'User Created Successfully..');
-        res.redirect('/user/login');
+        res.redirect('/users/login');
       } catch (err) {
         res.send(Message(400, false, `Error occured while registering user: ${err}`));
       }
     } else {
       req.flash('error', 'User already exists..!');
-      res.redirect('/user/login');
+      res.redirect('/users/login');
     }
   } catch (err) {
     res.send(Message(400, false, `Error occured in userModel while finding user: ${err}`));
   }
 }
 
-function cookiesVerify(req, res, token) {
+function cookiesVerify(req, res, token, id) {
   if (req.cookies.token === undefined) {
-    res.cookie('token', token, { maxAge: 900000, httpOnly: true }).redirect('/post/user');
+    res.cookie('token', token, { maxAge: 900000, httpOnly: true }).redirect(`/users/${id}/posts`);
   } else {
     req.flash('error', 'User already logged in');
-    res.redirect('/user/post');
+    res.redirect(`/users/${id}/posts`);
   }
 }
 
 function logout(req, res) {
-  res.clearCookie('token').redirect('/user/login');
+  res.clearCookie('token').redirect('/users/login');
 }
 
 async function authenticate(req, res) {
@@ -69,14 +72,14 @@ async function authenticate(req, res) {
         if (bycrpt.compareSync(req.body.password, data.password)) {
           jwt.sign({ data }, process.env.SECRET_KEY, function (err, token) {
             if (!err) {
-              cookiesVerify(req, res, token);
+              cookiesVerify(req, res, token, data.userName);
             } else {
               res.send(Message(400, false, `Error occured while signing a token: ${err}`));
             }
           });
         } else {
           req.flash('error', 'Invalid credential');
-          res.redirect('/user/login');
+          res.redirect('/users/login');
         }
       }
     });

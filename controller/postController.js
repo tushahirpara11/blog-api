@@ -10,10 +10,10 @@ function addPost(req, res) {
   try {
     postData.save();
     req.flash('success', "Post Added Successfully");
-    res.redirect('/post/user');
+    res.redirect(`/users/${req.user}/posts`);
   } catch (err) {
     req.flash('error', "Problem While Post Adding.");
-    res.redirect('/user/post');
+    res.redirect(`/users/post`);
   }
 }
 function Post(req, res) {

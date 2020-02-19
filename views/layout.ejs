@@ -55,12 +55,14 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
         <a class="navbar-brand" href="/">Blog Management</a>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <% if(email !== undefined) { %>
           <li class="nav-item">
-            <a class="nav-link" href="/post/user">View My Posts</a>
+            <a class="nav-link" href="/users/<%= email %>/posts">View My Posts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/user/post">Add Posts</a>
+            <a class="nav-link" href="/users/<%= email %>/post">Add Posts</a>
           </li>
+          <% } %>
         </ul>
         <% if(email !== undefined) { %>
         <form class="form-inline my-2 my-lg-0">
@@ -69,7 +71,7 @@
               <a class="nav-link" href="#"><%= email %></a>
             </li>
             <li style="float: right;" class="nav-item">
-              <a class="nav-link" href="/user/logout"> Logout</a>
+              <a class="nav-link" href="/user/<%= email%>/logout"> Logout</a>
             </li>
           </ul>
         </form>
@@ -77,10 +79,10 @@
         <form class="form-inline my-2 my-lg-0">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="/user/register">Sign up</a>
+              <a class="nav-link" href="/users/register">Sign up</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/user/login"> Login</a>
+              <a class="nav-link" href="/users/login"> Login</a>
             </li>
           </ul>
         </form>

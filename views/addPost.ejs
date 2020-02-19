@@ -4,33 +4,44 @@
 </div>
 <%}%>
 <span class="container margin-30">
-  <form method="POST" class="form-handle" action="/post/user">
-    <div>
-      <h1 style="text-align: center;">Add Post</h1>
-      <hr><br />      
-      <div class="form-group col-lg-6 margin-30">
-        <input type="text" id="title" name="title" class="form-control" placeholder="Enter Post Title" />
-      </div>
-      <div class="form-group col-lg-6">
-        <textarea id="discription" name="discription" class="form-control" placeholder="Enter Discription"></textarea>
-      </div>
-      <div class="form-group" style="margin-left: 5%;">
-        <input type="submit" value="Add Post" class="btn btn-info col-lg-2" onclick="return checkValidateData();"
-          style="margin:2% 2%  2% 0;" />
-        <button class="btn btn-danger col-lg-2" type="reset">CANCEL</button>
-      </div>
-    </div>
+  <form id="addpost" method="POST" class="form-handle" action="/users/<%=email%>/post">
+<div>
+  <h1 style="text-align: center;">Add Post</h1>
+  <hr><br />
+  <div class="form-group col-lg-6 margin-30">
+    <input type="text" id="title" name="title" class="form-control" placeholder="Enter Post Title" />
+  </div>
+  <div class="form-group col-lg-6">
+    <textarea id="discription" name="discription" class="form-control" placeholder="Enter Discription"></textarea>
+  </div>
+  <div class="form-group" style="margin-left: 5%;">
+    <input type="submit" value="Add Post" class="btn btn-info col-lg-2" style="margin:2% 2%  2% 0;" />
+    <button class="btn btn-danger col-lg-2" type="reset">CANCEL</button>
+  </div>
+</div>
 </form>
 </div>
-<script type="text/javascript">
-  function checkValidateData() {
-    let title = document.getElementById('postTitle').value;
-    let discription = document.getElementById('discription').value;
-    if (postTitle && discription) {
-      return true;
-    } else {
-      alert('Field should not be null');
-      return false;
-    }
-  }
+<script>
+  $(document).ready(function () {
+    $("#addpost").submit(function (e) {
+      let title = $("#title").val();
+      let discription = $("#discription").val();
+
+      $(".error").remove();
+
+      if (title.length < 1 || title == "") {
+        e.preventDefault();
+        $("#title").after(
+          '<span class="error">This field is required</span>'
+        );
+      }
+      if (discription == "") {
+        e.preventDefault();
+        $("#discription").after(
+          '<span class="error">This field is required</span>'
+        );
+      }
+    });
+    e.preventDefault();
+  });
 </script>
