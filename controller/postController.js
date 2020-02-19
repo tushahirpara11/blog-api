@@ -32,7 +32,9 @@ async function getPost(req, res) {
         }
         try {
           for (let i = 0; i < post.length; i++) {
-            cntLike = await postLikeModel.aggregate([{ "$match": { pid: { $eq: "" + post[i]._id } } }, { $group: { _id: post[i]._id, count: { $sum: 1 } } }]);
+            cntLike = await postLikeModel.aggregate([{
+              "$match": { pid: { $eq: "" + post[i]._id } }
+            }, { $group: { _id: post[i]._id, count: { $sum: 1 } } }]);
             if (cntLike.length) {
               likeCounter.push(cntLike);
             } else {
@@ -64,7 +66,8 @@ async function getPost(req, res) {
         }
         try {
           for (let i = 0; i < post.length; i++) {
-            cntLike = await postLikeModel.aggregate([{ "$match": { pid: { $eq: "" + post[i]._id } } }, { $group: { _id: post[i]._id, count: { $sum: 1 } } }]);
+            cntLike = await postLikeModel.aggregate([{ "$match": { pid: { $eq: "" + post[i]._id } } }
+              , { $group: { _id: post[i]._id, count: { $sum: 1 } } }]);
             if (cntLike.length) {
               likeCounter.push(cntLike);
             } else {
